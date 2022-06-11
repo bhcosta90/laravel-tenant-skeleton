@@ -18,7 +18,7 @@ class TenantSeeder extends Seeder
      */
     public function run()
     {
-        $total = 10;
+        $total = 25;
         $faker = \Faker\Factory::create();
 
         if (tenant()->id == '0b26c3fd-bb33-4419-867a-5aee383353f5') {
@@ -31,6 +31,7 @@ class TenantSeeder extends Seeder
             );
 
             User::factory()->create([
+                'id' => $user->id(),
                 'name' => $user->name->value,
                 'email' => $user->login->value,
                 'password' => $user->password->value,
@@ -45,6 +46,7 @@ class TenantSeeder extends Seeder
             );
 
             User::factory()->create([
+                'id' => $user->id(),
                 'name' => $user->name->value,
                 'email' => $user->login->value,
                 'password' => $user->password->value,
