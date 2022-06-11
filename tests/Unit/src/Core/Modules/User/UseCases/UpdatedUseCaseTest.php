@@ -14,7 +14,7 @@ use Mockery;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-class UpdateTest extends TestCase
+class UpdatedUseCaseTest extends TestCase
 {
     public function test_handle()
     {
