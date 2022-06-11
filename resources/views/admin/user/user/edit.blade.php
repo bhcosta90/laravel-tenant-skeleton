@@ -9,12 +9,18 @@
             <div class='row'>
                 <div class='form-group col-6 mb-3'>
                     <label class='control-label'>{{ __('Nome') }}</label>
-                    <input type="text" name="name" value="{{ old('name') ?? $model->name}}" class='form-control'>
+                    <input type="text" name="name" value="{{ old('name') ?? $model->name}}" class='form-control @error('name') is-invalid @enderror'>
+                    @error('name')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class='form-group col-6 mb-3'>
                     <label class='control-label'>{{ __('Login') }}</label>
-                    <input type="text" name="login" value="{{ old('login') ?? $model->login}}" class='form-control'>
+                    <input type="text" name="login" value="{{ old('login') ?? $model->login}}" class='form-control @error('login') is-invalid @enderror"'>
+                    @error('login')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
 

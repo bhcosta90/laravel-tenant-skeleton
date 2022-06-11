@@ -60,7 +60,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id, UpdatedUseCase $uc)
+    public function update(UserRequest $request, $id, UpdatedUseCase $uc)
     {
         $resp = $uc->handle(new UpdatedInput(
             id: $id,
