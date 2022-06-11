@@ -24,7 +24,7 @@ class CreatedUseCaseTest extends TestCase
 
         $ret = $uc->handle(new Input(
             name: 'bruno costa',
-            login: new LoginInputObject('teste'),
+            login: 'teste@teste.com',
             password: 'bruno costa',
         ));
 

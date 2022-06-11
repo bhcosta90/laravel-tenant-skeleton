@@ -4,6 +4,8 @@ namespace Core\Modules\User\UseCases;
 
 use Core\Modules\User\Domain\UserEntity;
 use Core\Modules\User\Repository\UserRepository;
+use Core\Shared\ValueObjects\Input\EmailInputObject;
+use Core\Shared\ValueObjects\Input\LoginInputObject;
 use Core\Shared\ValueObjects\Input\NameInputObject;
 use Core\Shared\ValueObjects\Input\PasswordInputObject;
 
@@ -16,9 +18,15 @@ class CreatedUseCase
 
     public function handle(DTO\Created\Input $input): DTO\Created\Output
     {
+        $login = new LoginInputObject($input->login);
+
+        if (strpos($input->login, "@") !== false) {
+            $login = new EmailInputObject($input->login);
+        }
+
         $obj = new UserEntity(
             name: new NameInputObject($input->name),
-            login: $input->login,
+            login: $login,
             password: new PasswordInputObject($input->password),
         );
 

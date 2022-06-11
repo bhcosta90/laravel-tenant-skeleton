@@ -4,6 +4,8 @@ namespace Core\Modules\User\UseCases;
 
 use Core\Modules\User\Domain\UserEntity;
 use Core\Modules\User\Repository\UserRepository;
+use Core\Shared\ValueObjects\Input\EmailInputObject;
+use Core\Shared\ValueObjects\Input\LoginInputObject;
 use Core\Shared\ValueObjects\Input\NameInputObject;
 
 class UpdatedUseCase
@@ -15,12 +17,18 @@ class UpdatedUseCase
 
     public function handle(DTO\Updated\Input $input): DTO\Updated\Output
     {
+        $login = new LoginInputObject($input->login);
+
+        if (strpos($input->login, "@") !== false) {
+            $login = new EmailInputObject($input->login);
+        }
+
         /** @var UserEntity */
         $entity = $this->repo->find($input->id);
 
         $entity->update(
             name: new NameInputObject($input->name),
-            login: $input->login
+            login: $login
         );
 
         $entity = $this->repo->update($entity);

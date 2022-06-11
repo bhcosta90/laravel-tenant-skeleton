@@ -8,7 +8,7 @@ class Input
 {
     public function __construct(
         public string $name,
-        public LoginInputObject|EmailInputObject $login,
+        public string $login,
         public string $password,
     ) {
         //

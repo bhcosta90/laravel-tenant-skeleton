@@ -28,7 +28,7 @@ class UpdatedUseCaseTest extends TestCase
         $ret = $uc->handle(new Input(
             id: $objEntity->id(),
             name: 'bruno costa',
-            login: new LoginInputObject('teste')
+            login: 'teste'
         ));
 
         $this->assertInstanceOf(Output::class, $ret);
