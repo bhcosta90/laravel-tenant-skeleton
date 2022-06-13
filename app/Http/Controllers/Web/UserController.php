@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
-use App\Http\Controllers\Presenters\PaginationPresenter;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Web\Presenters\PaginationPresenter;
 use App\Http\Requests\UserRequest;
 use Core\Modules\User\UseCases\CreatedUseCase;
 use Core\Modules\User\UseCases\DeleteUseCase;
@@ -13,7 +14,6 @@ use Core\Modules\User\UseCases\DTO\List\Input as ListInput;
 use Core\Modules\User\UseCases\DTO\Created\Input as CreatedInput;
 use Core\Modules\User\UseCases\DTO\Find\Input as FindInput;
 use Core\Modules\User\UseCases\DTO\Updated\Input as UpdatedInput;
-use Core\Shared\ValueObjects\Input\LoginInputObject;
 use Illuminate\Http\Request;
 
 class UserController extends Controller

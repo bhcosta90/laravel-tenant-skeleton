@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Web\UserController;
 use Illuminate\Support\Facades\{Auth, Route};
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;

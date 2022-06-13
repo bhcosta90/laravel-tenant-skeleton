@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Core\Modules\User\UseCases\DTO\Updated;
 
 use Core\Shared\ValueObjects\Input\{EmailInputObject, LoginInputObject};

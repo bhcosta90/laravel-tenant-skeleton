@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repositories\Eloquent;
 
 use App\Models\User;
@@ -36,7 +38,7 @@ class UserRepository implements RepositoryUserRepository
     public function update(EntityAbstract $entity): EntityAbstract
     {
         $obj = $this->model->find($entity->id());
-        
+
         $obj->update([
             'name' => $entity->name->value,
             'email' => $entity->login->value,
@@ -52,32 +54,36 @@ class UserRepository implements RepositoryUserRepository
 
     public function exist(string|int $key): bool
     {
+        return $this->model->where('id', $key)->count();
     }
 
     public function delete(EntityAbstract $entity): bool
     {
+        return $this->model->where('id', $entity->id())->delete();
     }
 
     public function paginate(?array $filter = null, ?int $page = 1, ?int $totalPage = 15): PaginationInterface
     {
-        $result = $this->model
+        $result = $this->select($filter);
+        return new PaginatorPresenter($result->paginate());
+    }
+
+    public function pluck(?array $filter = null): array
+    {
+        $result = $this->select($filter);
+        return $result->pluck('name', 'id')->toArray();
+    }
+
+    private function select(?array $filter = null)
+    {
+        return $this->model
             ->where(fn ($q) => ($f = $filter['name'] ?? null) ? $q->where('name', 'like', "%{$f}%") : null)
             ->where(fn ($q) => ($f = $filter['email'] ?? null) ? $q->where('email', $f) : null)
             ->where(fn ($q) => ($f = $filter['id'] ?? null) ? $q->whereIn('id', $f) : null)
             ->orderBy('name');
-
-        return new PaginatorPresenter($result->paginate());
     }
 
-    public function all(?array $filter = null): array|object
-    {
-    }
-
-    public function pluck(): array
-    {
-    }
-
-    private function entity(object $input): UserEntity
+    public function entity(object $input): UserEntity
     {
         return new UserEntity(
             name: new NameInputObject($input->name),

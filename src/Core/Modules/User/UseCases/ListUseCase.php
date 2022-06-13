@@ -1,13 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Core\Modules\User\UseCases;
 
 use Core\Modules\User\Repository\UserRepository;
 
 class ListUseCase
 {
-    public function __construct(private UserRepository $repo)
-    {
+    public function __construct(
+        private UserRepository $repo
+    ) {
         //
     }
 
@@ -19,8 +22,10 @@ class ListUseCase
             $input->total
         );
 
+        $data = array_map(fn ($rs) => $this->repo->entity($rs), $result->items());
+
         return new DTO\List\Output(
-            items: $result->items(),
+            items: $data,
             total: $result->total(),
             last_page: $result->lastPage(),
             first_page: $result->firstPage(),

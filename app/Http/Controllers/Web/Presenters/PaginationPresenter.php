@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Presenters;
+namespace App\Http\Controllers\Web\Presenters;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 

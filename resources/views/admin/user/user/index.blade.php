@@ -10,8 +10,8 @@
 
         @foreach($data as $rs)
         <tr>
-            <td>{{ $rs->name }}</td>
-            <td><a href="mailto:{{ $rs->email }}">{{ $rs->email }}</a></td>
+            <td>{{ $rs->name->value }}</td>
+            <td><a href="mailto:{{ $rs->login->value }}">{{ $rs->login->value }}</a></td>
         </tr>
         @endforeach
     </table>

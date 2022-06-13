@@ -1,8 +1,8 @@
 <?php
 
-namespace Core\Modules\User\UseCases\DTO\Created;
+declare(strict_types=1);
 
-use Core\Shared\ValueObjects\Input\{EmailInputObject, LoginInputObject};
+namespace Core\Modules\User\UseCases\DTO\Created;
 
 class Input
 {

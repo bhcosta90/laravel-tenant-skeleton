@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Core\Modules\User\Domain;
 
 use Core\Shared\Abstracts\EntityAbstract;

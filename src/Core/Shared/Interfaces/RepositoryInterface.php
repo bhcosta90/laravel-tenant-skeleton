@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Core\Shared\Interfaces;
 
 use Core\Shared\Abstracts\EntityAbstract;
@@ -18,7 +20,7 @@ interface RepositoryInterface
 
     public function paginate(?array $filter = null, ?int $page = 1, ?int $totalPage = 15): PaginationInterface;
 
-    public function all(?array $filter = null): array|object;
+    public function pluck(?array $filter = null): array;
 
-    public function pluck(): array;
+    public function entity(object $input): EntityAbstract;
 }

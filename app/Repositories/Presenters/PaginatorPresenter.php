@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repositories\Presenters;
 
 use Core\Shared\Interfaces\PaginationInterface;
