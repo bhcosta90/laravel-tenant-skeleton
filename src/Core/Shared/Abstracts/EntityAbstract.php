@@ -41,13 +41,13 @@ abstract class EntityAbstract implements EntityInterface
         return (string) $this->id;
     }
 
-    public function createdAt(): string
+    public function createdAt($format = 'Y-m-d H:i:s'): string
     {
-        return $this->createdAt->format('Y-m-d H:i:s');
+        return $this->createdAt->format($format);
     }
 
-    public function updatedAt(): string
+    public function updatedAt($format = 'Y-m-d H:i:s'): string
     {
-        return $this->updatedAt->format('Y-m-d H:i:s');
+        return $this->updatedAt->format($format);
     }
 }

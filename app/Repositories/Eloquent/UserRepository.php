@@ -6,6 +6,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\User;
 use App\Repositories\Presenters\PaginatorPresenter;
+use Carbon\Carbon;
 use Core\Modules\User\Domain\UserEntity;
 use Core\Modules\User\Repository\UserRepository as RepositoryUserRepository;
 use Core\Shared\Abstracts\EntityAbstract;
@@ -80,17 +81,21 @@ class UserRepository implements RepositoryUserRepository
             ->where(fn ($q) => ($f = $filter['name'] ?? null) ? $q->where('name', 'like', "%{$f}%") : null)
             ->where(fn ($q) => ($f = $filter['email'] ?? null) ? $q->where('email', $f) : null)
             ->where(fn ($q) => ($f = $filter['id'] ?? null) ? $q->whereIn('id', $f) : null)
-            ->orderBy('name');
+            ->orderBy('name', 'asc');
     }
 
     public function entity(object $input): UserEntity
     {
+        $createdAt = $input->created_at;
+        if ($createdAt instanceof Carbon) {
+            $createdAt = $createdAt->format('Y-m-d');
+        }
         return new UserEntity(
             name: new NameInputObject($input->name),
             login: new LoginInputObject($input->email),
             password: new PasswordInputObject($input->password, false),
             id: new UuidObject($input->id),
-            createdAt: new DateTime($input->created_at),
+            createdAt: new DateTime($createdAt),
         );
     }
 }
