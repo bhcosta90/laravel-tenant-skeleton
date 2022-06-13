@@ -60,7 +60,7 @@ class UserRepository implements RepositoryUserRepository
 
     public function delete(EntityAbstract $entity): bool
     {
-        return $this->model->where('id', $entity->id())->delete();
+        return $this->model->where('id', $entity->id())->first()->delete();
     }
 
     public function paginate(?array $filter = null, ?int $page = 1, ?int $totalPage = 15): PaginationInterface
