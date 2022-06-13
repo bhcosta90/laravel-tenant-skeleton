@@ -6,10 +6,7 @@ namespace Core\Modules\User\UseCases;
 
 use Core\Modules\User\Domain\UserEntity;
 use Core\Modules\User\Repository\UserRepository;
-use Core\Shared\ValueObjects\Input\EmailInputObject;
-use Core\Shared\ValueObjects\Input\LoginInputObject;
-use Core\Shared\ValueObjects\Input\NameInputObject;
-use Core\Shared\ValueObjects\Input\PasswordInputObject;
+use Core\Shared\ValueObjects\Input\{EmailInputObject, LoginInputObject, NameInputObject, PasswordInputObject};
 
 class CreatedUseCase
 {
