@@ -17,4 +17,5 @@ interface PaginationInterface
     public function perPage(): int;
     public function to(): int;
     public function from(): int;
+    public function totalPage(): int;
 }

@@ -66,7 +66,7 @@ class UserRepository implements RepositoryUserRepository
     public function paginate(?array $filter = null, ?int $page = 1, ?int $totalPage = 15): PaginationInterface
     {
         $result = $this->select($filter);
-        return new PaginatorPresenter($result->paginate());
+        return new PaginatorPresenter($result->paginate(perPage: $totalPage, page: $page));
     }
 
     public function pluck(?array $filter = null): array
@@ -82,7 +82,7 @@ class UserRepository implements RepositoryUserRepository
             ->where(fn ($q) => ($f = $filter['email'] ?? null) ? $q->where('email', $f) : null)
             ->where(fn ($q) => ($f = $filter['login'] ?? null) ? $q->where('email', $f) : null)
             ->where(fn ($q) => ($f = $filter['id'] ?? null) ? $q->whereIn('id', $f) : null)
-            ->orderBy('name', 'asc');
+            ->orderBy('name');
     }
 
     public function entity(object $input): UserEntity

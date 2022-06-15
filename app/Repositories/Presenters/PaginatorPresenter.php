@@ -62,6 +62,11 @@ class PaginatorPresenter implements PaginationInterface
         return $this->paginator->lastItem() ?? 0;
     }
 
+    public function totalPage(): int
+    {
+        return count($this->data);
+    }
+
     protected function resolveItems(array $items)
     {
         $response = [];

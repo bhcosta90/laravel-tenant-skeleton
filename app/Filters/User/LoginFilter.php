@@ -14,6 +14,7 @@ class LoginFilter extends FilterAbstract
             'label' => 'Login',
             'type' => 'text',
             'name' => 'login',
+            'placeholder' => 'Digite aqui o login que você quer pesquisar'
         ];
     }
 }

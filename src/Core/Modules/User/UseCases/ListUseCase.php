@@ -33,6 +33,7 @@ class ListUseCase
             to: $result->to(),
             from: $result->from(),
             current_page: $result->currentPage(),
+            total_page: $result->totalPage(),
         );
     }
 }

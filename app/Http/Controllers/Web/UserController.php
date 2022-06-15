@@ -6,15 +6,17 @@ use App\Filters\User\{EmailFilter, NameFilter};
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Web\Presenters\PaginationPresenter;
 use App\Http\Requests\UserRequest;
-use Core\Modules\User\UseCases\CreatedUseCase;
-use Core\Modules\User\UseCases\DeleteUseCase;
-use Core\Modules\User\UseCases\ListUseCase;
-use Core\Modules\User\UseCases\FindUseCase;
-use Core\Modules\User\UseCases\UpdatedUseCase;
-use Core\Modules\User\UseCases\DTO\List\Input as ListInput;
-use Core\Modules\User\UseCases\DTO\Created\Input as CreatedInput;
-use Core\Modules\User\UseCases\DTO\Find\Input as FindInput;
-use Core\Modules\User\UseCases\DTO\Updated\Input as UpdatedInput;
+use Core\Modules\User\UseCases\{
+    CreatedUseCase,
+    DeleteUseCase,
+    ListUseCase,
+    FindUseCase,
+    UpdatedUseCase,
+    DTO\List\Input as ListInput,
+    DTO\Created\Input as CreatedInput,
+    DTO\Find\Input as FindInput,
+    DTO\Updated\Input as UpdatedInput,
+};
 use Illuminate\Http\Request;
 
 class UserController extends Controller

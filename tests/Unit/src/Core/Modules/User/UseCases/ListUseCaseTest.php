@@ -25,7 +25,7 @@ class ListUseCaseTest extends TestCase
     {
         /** @var Repo|Mockery\MockInterface */
         $mockRepo =  Mockery::mock(stdClass::class, Repo::class);
-        $mockRepo->shouldReceive('paginate')->andReturn($this->mockPagination());
+        $mockRepo->shouldReceive('paginate')->times(1)->andReturn($this->mockPagination());
         return $mockRepo;
     }
 
@@ -41,6 +41,7 @@ class ListUseCaseTest extends TestCase
         $mock->shouldReceive('perPage')->andReturn(0);
         $mock->shouldReceive('to')->andReturn(0);
         $mock->shouldReceive('from')->andReturn(0);
+        $mock->shouldReceive('totalPage')->andReturn(0);
 
         return $mock;
     }
