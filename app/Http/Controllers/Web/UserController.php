@@ -28,7 +28,8 @@ class UserController extends Controller
         NameFilter $nameFilter,
         EmailFilter $emailFilter,
     ) {
-        $ret = $uc->handle(new ListInput(filter: $request->all()));
+        $input = new ListInput($request->all(), null, $request->page);
+        $ret = $uc->handle($input);
 
         return view('admin.user.user.index', [
             'data' => $paginationPresenter->render($ret),

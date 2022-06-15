@@ -26,6 +26,55 @@ class ListUseCaseTest extends TestCase
         $this->assertEquals(3, $ret->last_page);
     }
 
+    public function testHandlePage()
+    {
+        User::factory(35)->create();
+        $uc = new ListUseCase(
+            repo: app(UserRepository::class)
+        );
+
+        $ret = $uc->handle(new Input(
+            page: 2
+        ));
+        $this->assertEquals(2, $ret->current_page);
+        $this->assertEquals(10, $ret->total_page);
+    }
+
+    public function testHandleLimit(){
+        User::factory(35)->create();
+        $uc = new ListUseCase(
+            repo: app(UserRepository::class)
+        );
+
+        $ret = $uc->handle(new Input(
+            total: 50
+        ));
+        $this->assertEquals(1, $ret->current_page);
+        $this->assertEquals(35, $ret->total_page);
+        $this->assertEquals(50, $ret->per_page);
+    }
+
+    public function testHandleFilterId()
+    {
+        $users = User::factory(50)->create();
+
+        $uc = new ListUseCase(
+            repo: app(UserRepository::class)
+        );
+
+        $ret = $uc->handle(new Input(
+            filter: ['id' => ['teste123456789']]
+        ));
+        $this->assertEquals(0, $ret->total);
+        $this->assertEquals(1, $ret->last_page);
+
+        $ret = $uc->handle(new Input(
+            filter: ['id' => [$users[0]->id, $users[2]->id]]
+        ));
+        $this->assertEquals(2, $ret->total);
+        $this->assertEquals(1, $ret->last_page);
+    }
+    
     public function testHandleFilterName()
     {
         User::factory(50)->create();
@@ -68,40 +117,5 @@ class ListUseCaseTest extends TestCase
         ));
         $this->assertEquals(1, $ret->total);
         $this->assertEquals(1, $ret->last_page);
-    }
-
-    public function testHandleFilterId()
-    {
-        $users = User::factory(50)->create();
-
-        $uc = new ListUseCase(
-            repo: app(UserRepository::class)
-        );
-
-        $ret = $uc->handle(new Input(
-            filter: ['id' => ['teste123456789']]
-        ));
-        $this->assertEquals(0, $ret->total);
-        $this->assertEquals(1, $ret->last_page);
-
-        $ret = $uc->handle(new Input(
-            filter: ['id' => [$users[0]->id, $users[2]->id]]
-        ));
-        $this->assertEquals(2, $ret->total);
-        $this->assertEquals(1, $ret->last_page);
-    }
-
-    public function testHandlePage()
-    {
-        User::factory(35)->create();
-        $uc = new ListUseCase(
-            repo: app(UserRepository::class)
-        );
-
-        $ret = $uc->handle(new Input(
-            page: 2
-        ));
-        $this->assertEquals(2, $ret->current_page);
-        $this->assertEquals(10, $ret->total_page);
     }
 }
