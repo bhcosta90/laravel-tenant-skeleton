@@ -36,8 +36,8 @@ class DeleteUseCaseTest extends TestCase
     {
         /** @var Repo|Mockery\MockInterface */
         $mockRepo =  Mockery::mock(stdClass::class, Repo::class);
-        $mockRepo->shouldReceive('find')->times(limit: 1)->andReturn($entity);
-        $mockRepo->shouldReceive('delete')->times(limit: 1)->andReturn(true);
+        $mockRepo->shouldReceive('find')->times(1)->andReturn($entity);
+        $mockRepo->shouldReceive('delete')->times(1)->andReturn(true);
         return $mockRepo;
     }
 

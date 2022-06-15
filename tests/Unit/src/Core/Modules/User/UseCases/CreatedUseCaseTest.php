@@ -37,7 +37,7 @@ class CreatedUseCaseTest extends TestCase
         /** @var Repo|Mockery\MockInterface */
         $mockRepo =  Mockery::mock(stdClass::class, Repo::class);
 
-        $mockRepo->shouldReceive('insert')->times(limit: 1)->andReturn(new Entity(
+        $mockRepo->shouldReceive('insert')->times(1)->andReturn(new Entity(
             name: new NameInputObject('bruno costa'),
             login: new LoginInputObject('bruno costa'),
             password: new PasswordInputObject('bruno5124828')

@@ -43,8 +43,8 @@ class UpdatedUseCaseTest extends TestCase
     {
         /** @var Repo|Mockery\MockInterface */
         $mockRepo =  Mockery::mock(stdClass::class, Repo::class);
-        $mockRepo->shouldReceive('find')->times(limit: 1)->andReturn($entity);
-        $mockRepo->shouldReceive('update')->times(limit: 1)->andReturn($entityUpdated ?: $entity);
+        $mockRepo->shouldReceive('find')->times(1)->andReturn($entity);
+        $mockRepo->shouldReceive('update')->times(1)->andReturn($entityUpdated ?: $entity);
         return $mockRepo;
     }
 
