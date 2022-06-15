@@ -8,6 +8,7 @@ class Input
 {
     public function __construct(
         public string $id,
+        public ?string $idLogin = null,
     ) {
         //
     }

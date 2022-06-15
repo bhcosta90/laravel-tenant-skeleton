@@ -8,6 +8,11 @@ if (!function_exists('links')) {
         $spanFinish = "</span>";
 
         foreach ($links as $key => $value) {
+
+            if (isset($value['permission']) && !$value['permission']) {
+                continue;
+            }
+
             $str .= '<div class="action-column">';
             if ($key === 'edit') {
                 $str .= "<a class='btn btn-outline-info btn-xs btn-sm' href='{$value['link']}'>";

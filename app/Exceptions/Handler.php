@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -45,6 +46,14 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        $this->renderable(function (\Core\Modules\User\Exceptions\UserLoginException $e, $request) {
+            if ($request->ajax()) {
+                return response()->json(['message' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
+            } else {
+                return redirect()->back()->with('error', __($e->getMessage()));
+            }
         });
     }
 }

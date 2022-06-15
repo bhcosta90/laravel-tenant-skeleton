@@ -83,10 +83,10 @@ class UserController extends Controller
 
     public function destroy($id, DeleteUseCase $uc)
     {
-        $resp = $uc->handle(new FindInput($id));
+        $resp = $uc->handle(new FindInput($id, auth()->user()->id));
 
         return redirect()->route('user.index')
-            ->with('success', 'Usuário editado com sucesso')
+            ->with('success', 'Usuário deletado com sucesso')
             ->with('model', $resp);
     }
 }

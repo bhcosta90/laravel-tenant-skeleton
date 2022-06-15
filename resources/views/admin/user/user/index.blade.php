@@ -21,7 +21,8 @@
                         "link" => route('user.edit', $rs->id)
                     ],
                     "delete" => [
-                        "link" => route('user.destroy', $rs->id)
+                        "link" => route('user.destroy', $rs->id),
+                        "permission" => auth()->user()->id != $rs->id
                     ]
                 ]) !!}
             </td>

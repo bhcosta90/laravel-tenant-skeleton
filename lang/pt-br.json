@@ -122,5 +122,6 @@
     "Enable" : "Habilitar" ,
     "Regenerate Recovery Codes" : "Gerar novamente os códigos de recuperação" ,
     "Show Recovery Codes" : "Mostrar os códigos de recuperação" ,
-    "Disable" : "Desabilitar"
+    "Disable" : "Desabilitar",
+    "You cannot delete the user who is currently logged in.": "Você não pode deletar o usuário que está em acesso."
 }
