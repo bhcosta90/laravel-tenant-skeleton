@@ -16,8 +16,8 @@
                 </div>
 
                 <div class='form-group col-6 mb-3'>
-                    <label class='control-label'>{{ __('Login') }}</label>
-                    <input type="text" name="login" value="{{ old('login') ?? $model->login}}" class='form-control @error('login') is-invalid @enderror"'>
+                    <label class='control-label'>{{ __('E-mail') }}</label>
+                    <input type="email" name="login" value="{{ old('login') ?? $model->login}}" class='form-control @error('login') is-invalid @enderror"'>
                     @error('login')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
