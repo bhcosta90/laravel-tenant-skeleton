@@ -80,6 +80,7 @@ class UserRepository implements RepositoryUserRepository
         return $this->model
             ->where(fn ($q) => ($f = $filter['name'] ?? null) ? $q->where('name', 'like', "%{$f}%") : null)
             ->where(fn ($q) => ($f = $filter['email'] ?? null) ? $q->where('email', $f) : null)
+            ->where(fn ($q) => ($f = $filter['login'] ?? null) ? $q->where('email', $f) : null)
             ->where(fn ($q) => ($f = $filter['id'] ?? null) ? $q->whereIn('id', $f) : null)
             ->orderBy('name', 'asc');
     }

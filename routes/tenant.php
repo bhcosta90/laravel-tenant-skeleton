@@ -30,5 +30,5 @@ Route::middleware([
     });
 
     Route::view('/home', 'home');
-    Route::resource('user', UserController::class);
+    Route::resource('user', UserController::class)->middleware('auth');
 });

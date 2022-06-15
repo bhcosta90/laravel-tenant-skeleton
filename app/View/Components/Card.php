@@ -16,6 +16,7 @@ class Card extends Component
         private ?string $add = null,
         private ?string $labelAdd = null,
         private $data = null,
+        private $filter = null,
     ) {
         //
     }
@@ -32,6 +33,7 @@ class Card extends Component
             'add' => $this->add,
             'labelAdd' => $this->labelAdd,
             'data' => $this->data,
+            'filter' => $this->filter,
         ]);
     }
 }

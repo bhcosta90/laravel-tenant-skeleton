@@ -41,7 +41,7 @@ class TenantSeeder extends Seeder
         for ($i = 0; $i < $total; $i++) {
             $user = new UserEntity(
                 name: new NameInputObject($faker->name()),
-                login: new EmailInputObject($faker->email()),
+                login: new EmailInputObject($faker->freeEmail()),
                 password: new PasswordInputObject('$2y$10$XKKR51KTzWY9QVDDBH9TGep9PuZnE/Sjyxc0SMYoRnJb6Zs9QnOuC', false)
             );
 

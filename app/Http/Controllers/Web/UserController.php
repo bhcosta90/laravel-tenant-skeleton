@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Filters\User\{EmailFilter, NameFilter};
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Web\Presenters\PaginationPresenter;
 use App\Http\Requests\UserRequest;
@@ -18,12 +19,18 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index(ListUseCase $uc, PaginationPresenter $paginationPresenter, Request $request)
-    {
+    public function index(
+        ListUseCase $uc,
+        PaginationPresenter $paginationPresenter,
+        Request $request,
+        NameFilter $nameFilter,
+        EmailFilter $emailFilter,
+    ) {
         $ret = $uc->handle(new ListInput(filter: $request->all()));
 
         return view('admin.user.user.index', [
             'data' => $paginationPresenter->render($ret),
+            'filter' => [$nameFilter, $emailFilter],
         ]);
     }
 

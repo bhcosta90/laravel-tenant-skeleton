@@ -10,8 +10,9 @@ use Core\Shared\ValueObjects\Input\{EmailInputObject, LoginInputObject, NameInpu
 
 class CreatedUseCase
 {
-    public function __construct(private UserRepository $repo)
-    {
+    public function __construct(
+        private UserRepository $repo
+    ) {
         //
     }
 

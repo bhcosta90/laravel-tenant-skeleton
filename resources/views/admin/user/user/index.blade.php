@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<x-card title='Relatório de usuário' :data="$data" add="{{route('user.create')}}" label_add="Adicionar usuário">
+<x-card title='Relatório de usuário' :filter="$filter" :data="$data" add="{{route('user.create')}}" label_add="Adicionar usuário">
     <table class='table table-striped table-responsive-md mb-0 table-report'>
         <tr>
             <th>{{ __('Nome') }}</th>
