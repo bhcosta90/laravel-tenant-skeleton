@@ -3,7 +3,7 @@
 namespace Tests\Feature\src\Core\Modules\User\UseCases;
 
 use App\Models\User;
-use Core\Modules\User\Repository\UserRepository;
+use Core\Modules\User\Repository\UserRepositoryInterface;
 use Core\Modules\User\UseCases\ListUseCase;
 use Core\Modules\User\UseCases\DTO\List\{Input, Output};
 use Tests\TestCase;
@@ -16,7 +16,7 @@ class ListUseCaseTest extends TestCase
         User::factory()->create(['name' => 'aaaaaaaaaaaaaaaaa']);
 
         $uc = new ListUseCase(
-            repo: app(UserRepository::class)
+            repo: app(UserRepositoryInterface::class)
         );
 
         $ret = $uc->handle(new Input());
@@ -30,7 +30,7 @@ class ListUseCaseTest extends TestCase
     {
         User::factory(35)->create();
         $uc = new ListUseCase(
-            repo: app(UserRepository::class)
+            repo: app(UserRepositoryInterface::class)
         );
 
         $ret = $uc->handle(new Input(
@@ -43,7 +43,7 @@ class ListUseCaseTest extends TestCase
     public function testHandleLimit(){
         User::factory(35)->create();
         $uc = new ListUseCase(
-            repo: app(UserRepository::class)
+            repo: app(UserRepositoryInterface::class)
         );
 
         $ret = $uc->handle(new Input(
@@ -59,7 +59,7 @@ class ListUseCaseTest extends TestCase
         $users = User::factory(50)->create();
 
         $uc = new ListUseCase(
-            repo: app(UserRepository::class)
+            repo: app(UserRepositoryInterface::class)
         );
 
         $ret = $uc->handle(new Input(
@@ -81,7 +81,7 @@ class ListUseCaseTest extends TestCase
         User::factory(10)->create(['name' => 'teste123456789']);
 
         $uc = new ListUseCase(
-            repo: app(UserRepository::class)
+            repo: app(UserRepositoryInterface::class)
         );
 
         $ret = $uc->handle(new Input(
@@ -103,7 +103,7 @@ class ListUseCaseTest extends TestCase
         User::factory()->create(['email' => 'teste123456789']);
 
         $uc = new ListUseCase(
-            repo: app(UserRepository::class)
+            repo: app(UserRepositoryInterface::class)
         );
 
         $ret = $uc->handle(new Input(

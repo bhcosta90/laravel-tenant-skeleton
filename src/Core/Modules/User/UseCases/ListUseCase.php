@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Core\Modules\User\UseCases;
 
-use Core\Modules\User\Repository\UserRepository;
+use Core\Modules\User\Repository\UserRepositoryInterface;
 
 class ListUseCase
 {
     public function __construct(
-        private UserRepository $repo
+        private UserRepositoryInterface $repo
     ) {
         //
     }

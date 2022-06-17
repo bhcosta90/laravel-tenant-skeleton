@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\src\Core\Modules\User\UseCases;
 
-use Core\Modules\User\Repository\UserRepository as Repo;
+use Core\Modules\User\Repository\UserRepositoryInterface as Repo;
 use Core\Modules\User\UseCases\FindUseCase as UseCase;
 use Core\Modules\User\Domain\UserEntity as Entity;
 use Core\Modules\User\UseCases\DTO\Find\Input;

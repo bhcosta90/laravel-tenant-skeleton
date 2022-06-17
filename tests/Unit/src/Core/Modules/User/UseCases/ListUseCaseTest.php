@@ -4,7 +4,7 @@ namespace Tests\Unit\src\Core\Modules\User\UseCases;
 
 use PHPUnit\Framework\TestCase;
 use Core\Modules\User\UseCases\ListUseCase as UseCase;
-use Core\Modules\User\Repository\UserRepository as Repo;
+use Core\Modules\User\Repository\UserRepositoryInterface as Repo;
 use Core\Modules\User\UseCases\DTO\List\{Input, Output};
 use Core\Shared\Interfaces\PaginationInterface;
 use Mockery;

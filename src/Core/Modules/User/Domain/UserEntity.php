@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Core\Modules\User\Domain;
 
+use App\Events\CreateUserEvent;
 use Core\Shared\Abstracts\EntityAbstract;
 use Core\Shared\ValueObjects\Input\{EmailInputObject, NameInputObject, PasswordInputObject, LoginInputObject};
 use Core\Shared\ValueObjects\UuidObject;
@@ -11,13 +12,20 @@ use DateTime;
 
 class UserEntity extends EntityAbstract
 {
+    protected array $events = [];
+
     public function __construct(
         protected NameInputObject $name,
         protected EmailInputObject|LoginInputObject $login,
-        protected PasswordInputObject $password,
+        protected PasswordInputObject|string $password,
         protected ?UuidObject $id = null,
         protected ?DateTime $createdAt = null,
     ) {
+        if ($this->id() === null && is_string($password)) {
+            $this->events[] = new CreateUserEvent($this, $this->password);
+            $this->password = new PasswordInputObject($this->password);
+        }
+
         parent::__construct();
     }
 

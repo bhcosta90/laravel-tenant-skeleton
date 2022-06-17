@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Repositories\Eloquent\UserRepository as EloquentUserRepository;
-use Core\Modules\User\Repository\UserRepository;
+use App\Repositories\Eloquent\UserRepository;
+use Core\Modules\User\Repository\UserRepositoryInterface;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         Paginator::useBootstrap();
-        $this->app->bind(UserRepository::class, EloquentUserRepository::class);
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
     }
 
     /**

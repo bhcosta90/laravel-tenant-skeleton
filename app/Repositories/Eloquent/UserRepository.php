@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Repositories\Presenters\PaginatorPresenter;
 use Carbon\Carbon;
 use Core\Modules\User\Domain\UserEntity;
-use Core\Modules\User\Repository\UserRepository as RepositoryUserRepository;
+use Core\Modules\User\Repository\UserRepositoryInterface;
 use Core\Shared\Abstracts\EntityAbstract;
 use Core\Shared\Interfaces\PaginationInterface;
 use Core\Shared\ValueObjects\Input\LoginInputObject;
@@ -17,7 +17,7 @@ use Core\Shared\ValueObjects\Input\PasswordInputObject;
 use Core\Shared\ValueObjects\UuidObject;
 use DateTime;
 
-class UserRepository implements RepositoryUserRepository
+class UserRepository implements UserRepositoryInterface
 {
     public function __construct(private User $model)
     {

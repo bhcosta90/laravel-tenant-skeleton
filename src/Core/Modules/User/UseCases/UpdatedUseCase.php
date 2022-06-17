@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Core\Modules\User\UseCases;
 
 use Core\Modules\User\Domain\UserEntity;
-use Core\Modules\User\Repository\UserRepository;
+use Core\Modules\User\Repository\UserRepositoryInterface;
 use Core\Shared\ValueObjects\Input\{EmailInputObject, LoginInputObject, NameInputObject};
 
 class UpdatedUseCase
 {
     public function __construct(
-        private UserRepository $repo
+        private UserRepositoryInterface $repo
     ) {
         //
     }

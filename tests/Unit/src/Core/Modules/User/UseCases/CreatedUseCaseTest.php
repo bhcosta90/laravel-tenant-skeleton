@@ -2,9 +2,10 @@
 
 namespace Tests\Unit\src\Core\Modules\User\UseCases;
 
-use Core\Modules\User\Repository\UserRepository as Repo;
+use Core\Modules\User\Repository\UserRepositoryInterface as Repo;
 use Core\Modules\User\UseCases\CreatedUseCase as UseCase;
 use Core\Modules\User\Domain\UserEntity as Entity;
+use Core\Modules\User\Events\UserEventInterface;
 use Core\Modules\User\UseCases\DTO\Created\Input;
 use Core\Modules\User\UseCases\DTO\Created\Output;
 use Core\Shared\ValueObjects\Input\LoginInputObject;
@@ -20,6 +21,7 @@ class CreatedUseCaseTest extends TestCase
     {
         $uc = new UseCase(
             repo: $this->mockRepo(),
+            event: $this->mockEvent(),
         );
 
         $ret = $uc->handle(new Input(
@@ -42,6 +44,15 @@ class CreatedUseCaseTest extends TestCase
             login: new LoginInputObject('bruno costa'),
             password: new PasswordInputObject('bruno5124828')
         ));
+
+        return $mockRepo;
+    }
+
+    protected function mockEvent()
+    {
+        /** @var UserEventInterface|Mockery\MockInterface */
+        $mockRepo =  Mockery::mock(stdClass::class, UserEventInterface::class);
+        $mockRepo->shouldReceive('dispatch')->times(1);
 
         return $mockRepo;
     }
