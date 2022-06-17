@@ -16,7 +16,7 @@ use stdClass;
 
 class DeleteUseCaseTest extends TestCase
 {
-    public function test_handle()
+    public function testHandle()
     {
         $objEntity = $this->mockEntity('bruno costa', 'bruno costa', 'teste123456');
 

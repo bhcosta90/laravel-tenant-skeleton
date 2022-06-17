@@ -16,7 +16,7 @@ use stdClass;
 
 class FindUseCaseTest extends TestCase
 {
-    public function test_handle()
+    public function testHandle()
     {
         $objEntity = $this->mockEntity('bruno costa', 'bruno costa', 'teste123456');
 

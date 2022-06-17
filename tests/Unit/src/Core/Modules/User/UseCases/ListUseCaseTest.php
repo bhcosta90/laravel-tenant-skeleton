@@ -11,7 +11,7 @@ use Mockery;
 
 class ListUseCaseTest extends TestCase
 {
-    public function test_handle()
+    public function testHandle()
     {
         $uc = new UseCase(
             repo: $this->mockRepo()

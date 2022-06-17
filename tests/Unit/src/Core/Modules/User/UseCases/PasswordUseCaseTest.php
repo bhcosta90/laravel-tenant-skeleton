@@ -17,7 +17,7 @@ use stdClass;
 
 class PasswordUseCaseTest extends TestCase
 {
-    public function test_handle()
+    public function testHandle()
     {
         $objEntity = $this->mockEntity('bruno costa', 'bruno costa', 'teste123456');
         $objEntityUpdated = $this->mockEntity('bruno costa 123', 'bruno costa 123', 'teste123456789', $objEntity->id);
