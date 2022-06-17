@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace Core\Modules\User\UseCases;
 
 use Core\Modules\User\Domain\UserEntity;
-use Core\Modules\User\Events\UserEventInterface;
 use Core\Modules\User\Repository\UserRepositoryInterface;
+use Core\Shared\Interfaces\EventManagerInterface;
 use Core\Shared\Interfaces\TransactionInterface;
-use Core\Shared\ValueObjects\Input\{EmailInputObject, LoginInputObject, NameInputObject, PasswordInputObject};
+use Core\Shared\ValueObjects\Input\{EmailInputObject, LoginInputObject, NameInputObject};
 use Throwable;
 
 class CreatedUseCase
 {
     public function __construct(
         private UserRepositoryInterface $repo,
-        private UserEventInterface $event,
+        private EventManagerInterface $event,
         private TransactionInterface $transaction,
     ) {
         //

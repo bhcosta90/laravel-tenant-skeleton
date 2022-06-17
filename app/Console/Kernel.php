@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
+use DateTime;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Http;
 
 class Kernel extends ConsoleKernel
 {
@@ -15,7 +17,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $date = (new DateTime())->format('Y-m-d');
+        // $schedule->command("tenant:run payment:schedule --option='date={$date}'")->dailyAt('10:00:00');
+        $schedule->command("queue:work --stop-when-empty")->everyMinute();
+        $schedule->call(fn() => Http::get(config('app.url')))->everyTwoMinutes();
     }
 
     /**
