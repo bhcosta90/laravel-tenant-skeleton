@@ -5,6 +5,7 @@ namespace Tests\Unit\src\Core\Modules\User\UseCases;
 use Core\Modules\User\Repository\UserRepositoryInterface as Repo;
 use Core\Modules\User\UseCases\PasswordUseCase as UseCase;
 use Core\Modules\User\Domain\UserEntity as Entity;
+use Core\Modules\User\Exceptions\UserLoginException;
 use Core\Modules\User\UseCases\DTO\Password\Input;
 use Core\Modules\User\UseCases\DTO\Password\Output;
 use Core\Shared\ValueObjects\Input\LoginInputObject;
@@ -28,6 +29,7 @@ class PasswordUseCaseTest extends TestCase
         $ret = $uc->handle(new Input(
             id: $objEntity->id(),
             password: 'teste123',
+            passwordActive: 'teste123456',
         ));
 
         $this->assertInstanceOf(Output::class, $ret);
@@ -36,6 +38,21 @@ class PasswordUseCaseTest extends TestCase
         $this->assertEquals('bruno costa 123', $ret->name);
         $this->assertEquals($objEntityUpdated->id(), $objEntity->id());
         $this->assertEquals($objEntityUpdated->id(), $ret->id);
+    }
+
+    public function testHandleLoginException()
+    {
+        $this->expectException(UserLoginException::class);
+        $this->expectExceptionMessage('Incorrect username or password');
+        $objEntity = $this->mockEntity('bruno costa', 'bruno costa', 'teste123456');
+        $uc = new UseCase(
+            repo: $this->mockRepo($objEntity),
+        );
+        $uc->handle(new Input(
+            id: $objEntity->id(),
+            password: 'teste123',
+            passwordActive: 'teste123456789',
+        ));
     }
 
     protected function mockRepo($entity, $entityUpdated = null)

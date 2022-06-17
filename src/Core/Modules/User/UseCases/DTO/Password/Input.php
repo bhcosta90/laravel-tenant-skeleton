@@ -9,6 +9,7 @@ class Input
     public function __construct(
         public string $id,
         public string $password,
+        public string $passwordActive,
     ) {
         //
     }

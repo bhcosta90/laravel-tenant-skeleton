@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Core\Modules\User\UseCases;
 
 use Core\Modules\User\Domain\UserEntity;
+use Core\Modules\User\Exceptions\UserLoginException;
 use Core\Modules\User\Repository\UserRepositoryInterface;
 
 class PasswordUseCase
@@ -19,6 +20,11 @@ class PasswordUseCase
     {
         /** @var UserEntity */
         $entity = $this->repo->find($input->id);
+
+        if (!$entity->login($input->passwordActive)) {
+            throw new UserLoginException('Incorrect username or password');
+        }
+
         $entity->password($input->password);
         $entity = $this->repo->password($entity);
 
