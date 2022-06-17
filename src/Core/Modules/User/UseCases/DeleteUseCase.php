@@ -7,7 +7,6 @@ namespace Core\Modules\User\UseCases;
 use Core\Modules\User\Exceptions\UserLoginException;
 use Core\Modules\User\Repository\UserRepositoryInterface;
 use Core\Shared\ValueObjects\DeleteObject;
-use Exception;
 
 class DeleteUseCase
 {
