@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Core\Modules\User\Domain;
 
-use App\Events\CreateUserEvent;
+use Core\Modules\User\Events\CreateUserEvent;
 use Core\Shared\Abstracts\EntityAbstract;
 use Core\Shared\ValueObjects\Input\{EmailInputObject, NameInputObject, PasswordInputObject, LoginInputObject};
 use Core\Shared\ValueObjects\UuidObject;
@@ -21,11 +21,14 @@ class UserEntity extends EntityAbstract
         protected ?UuidObject $id = null,
         protected ?DateTime $createdAt = null,
     ) {
-        if ($this->id() === null) {
+        if ($this->id() == null) {
 
-            $this->events[] = new CreateUserEvent($this, $this->password);
+            $this->events[] = new CreateUserEvent(
+                $this, 
+                $password instanceof PasswordInputObject ? $this->password->value : $this->password
+            );
 
-            if (is_string($password)) {
+            if (!$password instanceof PasswordInputObject) {
                 $this->password = new PasswordInputObject($this->password);
             }
         }

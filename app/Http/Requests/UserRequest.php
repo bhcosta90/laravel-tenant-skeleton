@@ -23,12 +23,10 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        $required = $this->route('user') ? "nullable" : "required";
-
         return [
             'name' => 'required|min:3|max:100',
             'login' => 'required|min:3|max:100|email',
-            'password' => "{$required}|min:6|max:18"
+            'password' => "nullable|min:6|max:18"
         ];
     }
 }

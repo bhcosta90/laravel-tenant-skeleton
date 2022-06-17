@@ -8,6 +8,7 @@ use Core\Modules\User\Domain\UserEntity as Entity;
 use Core\Modules\User\Events\UserEventInterface;
 use Core\Modules\User\UseCases\DTO\Created\Input;
 use Core\Modules\User\UseCases\DTO\Created\Output;
+use Core\Shared\Interfaces\TransactionInterface;
 use Core\Shared\ValueObjects\Input\LoginInputObject;
 use Core\Shared\ValueObjects\Input\NameInputObject;
 use Core\Shared\ValueObjects\Input\PasswordInputObject;
@@ -22,6 +23,7 @@ class CreatedUseCaseTest extends TestCase
         $uc = new UseCase(
             repo: $this->mockRepo(),
             event: $this->mockEvent(),
+            transaction: $this->mockTransaction(),
         );
 
         $ret = $uc->handle(new Input(
@@ -54,6 +56,14 @@ class CreatedUseCaseTest extends TestCase
         $mockRepo =  Mockery::mock(stdClass::class, UserEventInterface::class);
         $mockRepo->shouldReceive('dispatch')->times(1);
 
+        return $mockRepo;
+    }
+
+    protected function mockTransaction()
+    {
+        /** @var TransactionInterface|Mockery\MockInterface */
+        $mockRepo =  Mockery::mock(stdClass::class, TransactionInterface::class);
+        $mockRepo->shouldReceive('commit')->times(1);
         return $mockRepo;
     }
 }

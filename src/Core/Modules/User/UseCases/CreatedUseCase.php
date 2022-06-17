@@ -7,40 +7,49 @@ namespace Core\Modules\User\UseCases;
 use Core\Modules\User\Domain\UserEntity;
 use Core\Modules\User\Events\UserEventInterface;
 use Core\Modules\User\Repository\UserRepositoryInterface;
+use Core\Shared\Interfaces\TransactionInterface;
 use Core\Shared\ValueObjects\Input\{EmailInputObject, LoginInputObject, NameInputObject, PasswordInputObject};
+use Throwable;
 
 class CreatedUseCase
 {
     public function __construct(
         private UserRepositoryInterface $repo,
         private UserEventInterface $event,
+        private TransactionInterface $transaction,
     ) {
         //
     }
 
     public function handle(DTO\Created\Input $input): DTO\Created\Output
     {
-        $login = new LoginInputObject($input->login);
+        try {
+            $login = new LoginInputObject($input->login);
 
-        if (strpos($input->login, "@") !== false) {
-            $login = new EmailInputObject($input->login);
+            if (strpos($input->login, "@") !== false) {
+                $login = new EmailInputObject($input->login);
+            }
+
+            $obj = new UserEntity(
+                name: new NameInputObject($input->name),
+                login: $login,
+                password: $input->password ?: $this->randomPassword(8),
+            );
+
+            $entity = $this->repo->insert($obj);
+            $this->event->dispatch($obj->events);
+            $this->transaction->commit();
+
+            return new DTO\Created\Output(
+                id: $entity->id(),
+                name: $entity->name->value,
+                login: $entity->login->value,
+                password: $entity->password->value,
+            );
+        } catch (Throwable $e) {
+            $this->transaction->rollback();
+            throw $e;
         }
-
-        $obj = new UserEntity(
-            name: new NameInputObject($input->name),
-            login: $login,
-            password: $input->password ?: $this->randomPassword(8),
-        );
-
-        $entity = $this->repo->insert($obj);
-        $this->event->dispatch($entity->events);
-
-        return new DTO\Created\Output(
-            id: $entity->id(),
-            name: $entity->name->value,
-            login: $entity->login->value,
-            password: $entity->password->value,
-        );
     }
 
     private function randomPassword($total = 8)
