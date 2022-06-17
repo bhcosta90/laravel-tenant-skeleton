@@ -48,6 +48,17 @@ class UserRepository implements UserRepositoryInterface
         return $this->entity($obj);
     }
 
+    public function password(EntityAbstract $entity): EntityAbstract
+    {
+        $obj = $this->model->find($entity->id());
+
+        $obj->update([
+            'password' => $entity->password->value,
+        ]);
+
+        return $this->entity($obj);
+    }
+
     public function find(string|int $key): EntityAbstract
     {
         return $this->entity($this->model->find($key));

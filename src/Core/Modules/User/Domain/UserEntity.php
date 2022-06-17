@@ -22,13 +22,12 @@ class UserEntity extends EntityAbstract
         protected ?DateTime $createdAt = null,
     ) {
         if ($this->id() === null) {
-            
+
             $this->events[] = new CreateUserEvent($this, $this->password);
 
             if (is_string($password)) {
                 $this->password = new PasswordInputObject($this->password);
             }
-            
         }
 
         parent::__construct();
@@ -45,5 +44,10 @@ class UserEntity extends EntityAbstract
     ) {
         $this->name = $name;
         $this->login = $login;
+    }
+
+    public function password(string $password)
+    {
+        $this->password = new PasswordInputObject($password);
     }
 }
