@@ -25,7 +25,7 @@ class CreateUserEvent extends EventAbstract
     {
         return [
             'id' => $this->user->id(),
-            'email' => $this->user->login,
+            'email' => $this->user->login->value,
             'password' => $this->password,
         ];
     }
