@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Filters\User\{EmailFilter, NameFilter};
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Web\Presenters\PaginationPresenter;
+use App\Http\Requests\Profile\PasswordProfileRequest;
 use App\Http\Requests\UserRequest;
 use Core\Modules\User\UseCases\{
     CreatedUseCase,
@@ -12,10 +13,12 @@ use Core\Modules\User\UseCases\{
     ListUseCase,
     FindUseCase,
     UpdatedUseCase,
+    PasswordUseCase,
     DTO\List\Input as ListInput,
     DTO\Created\Input as CreatedInput,
     DTO\Find\Input as FindInput,
     DTO\Updated\Input as UpdatedInput,
+    DTO\Password\Input as PasswordInput,
 };
 use Illuminate\Http\Request;
 
@@ -88,8 +91,23 @@ class UserController extends Controller
     {
         $resp = $uc->handle(new FindInput($id, auth()->user()->id));
 
-        return redirect()->route('user.index')
+        return redirect()->back()
             ->with('success', 'Usuário deletado com sucesso')
+            ->with('model', $resp);
+    }
+
+    public function profileShow(FindUseCase $uc){
+        $resp = $uc->handle(new FindInput(auth()->user()->id));
+        return view('admin.user.user.profile', [
+            'model' => $resp,
+        ]);
+    }
+
+    public function passwordStore(PasswordUseCase $uc, PasswordProfileRequest $request){
+        $resp = $uc->handle(new PasswordInput(auth()->user()->id, $request->password, $request->new_password));
+
+        return redirect()->back()
+            ->with('success', 'Senha editada com sucesso')
             ->with('model', $resp);
     }
 }

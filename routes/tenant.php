@@ -31,4 +31,6 @@ Route::middleware([
 
     Route::view('/home', 'home');
     Route::resource('user', UserController::class)->middleware('auth');
+    Route::get('profile', [UserController::class, 'profileShow'])->name('profile.show')->middleware('auth');
+    Route::post('profile/password', [UserController::class, 'passwordStore'])->name('profile.store')->middleware('auth');
 });
