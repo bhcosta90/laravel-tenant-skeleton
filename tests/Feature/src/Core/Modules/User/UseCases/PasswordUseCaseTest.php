@@ -17,7 +17,7 @@ class PasswordUseCaseTest extends TestCase
         $uc = new PasswordUseCase(
             repo: app(UserRepositoryInterface::class)
         );
-        $ret = $uc->handle(new Input(id: $user->id, password: 'teste123', passwordActive: 'password'));
+        $ret = $uc->handle(new Input(id: $user->id, newPassword: 'teste123', password: 'password'));
         $this->assertInstanceOf(Output::class, $ret);
         $this->assertTrue(password_verify('teste123', $ret->password));
     }
@@ -30,6 +30,6 @@ class PasswordUseCaseTest extends TestCase
         $uc = new PasswordUseCase(
             repo: app(UserRepositoryInterface::class)
         );
-        $uc->handle(new Input(id: $user->id, password: 'teste123', passwordActive: 'teste123'));
+        $uc->handle(new Input(id: $user->id, newPassword: 'teste123', password: 'teste123'));
     }
 }

@@ -21,11 +21,11 @@ class PasswordUseCase
         /** @var UserEntity */
         $entity = $this->repo->find($input->id);
 
-        if (!$entity->login($input->passwordActive)) {
+        if (!$entity->login($input->password)) {
             throw new UserLoginException('Incorrect username or password');
         }
 
-        $entity->password($input->password);
+        $entity->password($input->newPassword);
         $entity = $this->repo->password($entity);
 
         return new DTO\Password\Output(

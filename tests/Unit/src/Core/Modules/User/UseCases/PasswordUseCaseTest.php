@@ -28,8 +28,8 @@ class PasswordUseCaseTest extends TestCase
 
         $ret = $uc->handle(new Input(
             id: $objEntity->id(),
-            password: 'teste123',
-            passwordActive: 'teste123456',
+            newPassword: 'teste123',
+            password: 'teste123456',
         ));
 
         $this->assertInstanceOf(Output::class, $ret);
@@ -50,8 +50,8 @@ class PasswordUseCaseTest extends TestCase
         );
         $uc->handle(new Input(
             id: $objEntity->id(),
+            newPassword: 'teste123456789',
             password: 'teste123',
-            passwordActive: 'teste123456789',
         ));
     }
 
