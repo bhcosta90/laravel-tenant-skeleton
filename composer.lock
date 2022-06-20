@@ -4,8 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cbbbd60d2ed24ca780bba0e62c8db43b",
+    "content-hash": "ba6e6848b54c8579fb6eb3bbfdb79e85",
     "packages": [
+        {
+            "name": "bhcosta90/package-domain",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bhcosta90/package-domain.git",
+                "reference": "09586eef19b7cf753cf3f28435316a577cb06548"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bhcosta90/package-domain/zipball/09586eef19b7cf753cf3f28435316a577cb06548",
+                "reference": "09586eef19b7cf753cf3f28435316a577cb06548",
+                "shasum": ""
+            },
+            "require": {
+                "ramsey/uuid": "^4.3"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Core\\Shared\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Bruno Costa",
+                    "email": "bruno.costa@superlogica.com"
+                }
+            ],
+            "support": {
+                "source": "https://github.com/bhcosta90/package-domain/tree/master",
+                "issues": "https://github.com/bhcosta90/package-domain/issues"
+            },
+            "time": "2022-06-20T18:34:40+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.9.3",
