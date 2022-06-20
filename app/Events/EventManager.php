@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions;
+namespace App\Events;
 
 use Core\Shared\Abstracts\EventAbstract;
 use Core\Shared\Interfaces\EventManagerInterface;

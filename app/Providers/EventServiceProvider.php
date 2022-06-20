@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
+use App\Mail\User\SendEmailUserCreated;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -27,7 +30,10 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Event::listen('user.created.*', function ($eventName, array $data) {
+            Log::info("Event: {$eventName}");
+            Mail::send(new SendEmailUserCreated($data['name'], $data['email'], $data['password']));
+        });
     }
 
     /**
