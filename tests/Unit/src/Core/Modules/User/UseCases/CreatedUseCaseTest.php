@@ -5,9 +5,9 @@ namespace Tests\Unit\src\Core\Modules\User\UseCases;
 use Core\Modules\User\Repository\UserRepositoryInterface as Repo;
 use Core\Modules\User\UseCases\CreatedUseCase as UseCase;
 use Core\Modules\User\Domain\UserEntity as Entity;
-use Core\Modules\User\Events\UserEventInterface;
 use Core\Modules\User\UseCases\DTO\Created\Input;
 use Core\Modules\User\UseCases\DTO\Created\Output;
+use Core\Shared\Interfaces\EventManagerInterface;
 use Core\Shared\Interfaces\TransactionInterface;
 use Core\Shared\ValueObjects\Input\LoginInputObject;
 use Core\Shared\ValueObjects\Input\NameInputObject;
@@ -52,8 +52,8 @@ class CreatedUseCaseTest extends TestCase
 
     protected function mockEvent()
     {
-        /** @var UserEventInterface|Mockery\MockInterface */
-        $mockRepo =  Mockery::mock(stdClass::class, UserEventInterface::class);
+        /** @var EventManagerInterface|Mockery\MockInterface */
+        $mockRepo =  Mockery::mock(stdClass::class, EventManagerInterface::class);
         $mockRepo->shouldReceive('dispatch')->times(1);
 
         return $mockRepo;
