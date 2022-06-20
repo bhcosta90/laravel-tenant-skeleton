@@ -22,11 +22,12 @@ class UserEntity extends EntityAbstract
         protected ?DateTime $createdAt = null,
     ) {
         if ($this->id() == null) {
-
-            $this->events[] = new CreateUserEvent(
-                $this, 
-                $password instanceof PasswordInputObject ? $this->password->value : $this->password
+            $event = new CreateUserEvent(
+                $this,
+                $this->password instanceof PasswordInputObject ? $this->password->value : $this->password
             );
+
+            $this->register($event);
 
             if (!$password instanceof PasswordInputObject) {
                 $this->password = new PasswordInputObject($this->password);
@@ -34,6 +35,11 @@ class UserEntity extends EntityAbstract
         }
 
         parent::__construct();
+    }
+
+    public function register($event)
+    {
+        $this->events[] = $event;
     }
 
     public function login(string $password): bool
